@@ -1,0 +1,7 @@
+module CFirmata {
+  header "includes/firmata.h"
+  header "includes/serial.h"
+  header "includes/servo.h"
+  link "firmata"
+  export *
+}

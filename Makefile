@@ -1,3 +1,13 @@
+SHAREDLIB = libfirmata.so
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	SHAREDLIBPATH = /usr/lib
+endif
+ifeq ($(UNAME_S),Darwin)
+	SHAREDLIBPATH = /usr/local/lib
+endif
+
 program_NAME := firmatac
 program_C_SRCS := $(wildcard src/*.c)
 program_C_OBJS := ${program_C_SRCS:.c=.o}
@@ -14,13 +24,17 @@ LDFLAGS += $(foreach library,$(program_LIBRARIES),-l$(library))
 .PHONY: all clean distclean
 
 all: $(program_NAME)
-	ar rc libfirmatac.a $(program_OBJS)
- 
+	CC -shared -o $(SHAREDLIB) $(program_OBJS)
+
+install: all
+	cp $(SHAREDLIB) $(SHAREDLIBPATH)
+
 $(program_NAME): $(program_OBJS)
 #	$(CC) $(program_OBJS) -o $(program_NAME)
 
 clean:
-	@- $(RM) libfirmatac.a
+	@- $(RM) $(SHAREDLIBPATH)/$(SHAREDLIB)
+	@- $(RM) $(SHAREDLIB)
 	@- $(RM) $(program_NAME)
 	@- $(RM) $(program_OBJS)
 
