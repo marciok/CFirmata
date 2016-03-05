@@ -267,3 +267,7 @@ int firmata_digitalWrite(t_firmata *firmata, int pin, int value) {
     res = serial_write(firmata->serial, buff, 3);
     return (res);
 }
+
+t_pin firmata_get_pin(t_firmata *firmata, int pin) {
+    return firmata->pins[pin];
+}

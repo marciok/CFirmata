@@ -18,17 +18,17 @@
 #endif
 
 t_serial *serial_new() {
-  t_serial    *res;
+    t_serial *res;
 
-  res = malloc(sizeof(t_serial));
-  if (!res) {
-      return (NULL);
-  }
-  res->port_is_open = 0;
-  res->baud_rate = 38400;
-  res->tx = 0;
-  res->rx = 0;
-  return (res);
+    res = malloc(sizeof(t_serial));
+    if (!res) {
+        return (NULL);
+    }
+    res->port_is_open = 0;
+    res->baud_rate = 38400;
+    res->tx = 0;
+    res->rx = 0;
+    return (res);
 }
 
 int serial_open(t_serial *serial, char *name) {
