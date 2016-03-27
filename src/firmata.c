@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_firmata *firmata_new(char *name) {
+t_firmata *firmata_new(char *name, int baud) {
     t_firmata *res;
 
     printf("Opening device at: %s\n", name);
@@ -21,7 +21,7 @@ t_firmata *firmata_new(char *name) {
     }
     serial_open(res->serial, name);
     firmata_initPins(res);
-    serial_setBaud(res->serial, 57600);
+    serial_setBaud(res->serial, baud);
     firmata_askFirmware(res);
     printf("Device opened at: %s\n", name);
     return (res);

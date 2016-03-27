@@ -67,7 +67,7 @@ typedef struct s_firmata {
     char firmware[140];
 } t_firmata;
 
-t_firmata *firmata_new(char *name);
+t_firmata *firmata_new(char *name, int baud);
 void firmata_initPins(t_firmata *firmata);
 int firmata_askFirmware(t_firmata *firmata);
 int firmata_pinMode(t_firmata *firmata, int pin, int mode);
